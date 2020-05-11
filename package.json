@@ -1,0 +1,17 @@
+{
+  "name": "contract_bridge_deck.web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:tellip/contract_bridge_deck.web.git",
+  "author": "Terrance Phillip <luojunyi.0@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-proposal-do-expressions": "^7.8.3",
+    "@babel/register": "^7.9.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean": "^0.4.0",
+    "npm-check-updates": "^5.0.0"
+  }
+}
