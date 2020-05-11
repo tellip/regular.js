@@ -1,3 +1,7 @@
-let text = require('./text');
+let check = require('./check');
 
-console.log(text.patterns.LiteralCharacter(() => true).match("asdf1234", 0, 8));
+let f = check.overload(
+    [['number'], (a, b) => a + b],
+    [['string'], s => 'hello ' + s]
+);
+console.log(f(1, 2), f('asdf'));
