@@ -1,7 +1,16 @@
-let type = require('./type');
+const type = require('./type');
 
-let f = type.overload(
-    [{0: Number, 1: 'number'}, (a, b) => a + b],
-    [['string'], s => 'hello ' + s]
+let Record = type.function(
+    {0: 'boolean', 1: 'number', 2: 'number', 3: [{0: 'string'}]},
+    (success, begin, end, children) => do {
+        let record = {success, begin, end, children: children.map(([key, value]) => ({key, value}))};
+        record.__proto__ = Record.prototype;
+        record;
+    }
 );
-console.log(f(1, 2), f('asdf'));
+Record.rule[0][3][0][1] = Record;
+
+let record = Record(false, 0, 1, [
+    ['asdf', Record(true, 0, 1, [])]
+]);
+console.log(record);

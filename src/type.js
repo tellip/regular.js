@@ -1,7 +1,7 @@
 module.exports = do {
     let check = (pattern, data) => pattern === null ? data === null : ({
         string: () => typeof data === pattern,
-        function: () => Object(data) instanceof pattern,
+        function: () => data instanceof pattern || data.constructor === pattern,
         object: () => ({
             Array: () => data.every(sub_data => pattern.some(sub_pattern => check(sub_pattern, sub_data))),
             Object: () => Reflect.ownKeys(pattern).every(key => check(pattern[key], data[key]))
@@ -17,9 +17,29 @@ module.exports = do {
         rtn;
     };
 
-    let overload = (...polys) => (...args) => switch_(args, ...polys.map(
-        ([pattern, callback]) => [pattern, () => callback(...args)]
-    ));
+    let overload = (...rules) => do {
+        let f = function (...args) {
+            return switch_(args, ...f.rules.map(
+                ([pattern, callback]) => [pattern, () => callback(...args)]
+            ));
+        };
+        Object.defineProperty(f, 'rules', {
+            get() {
+                return rules;
+            }
+        });
+        f;
+    };
 
-    ({check, switch: switch_, overload});
+    let function_ = (pattern, callback) => do {
+        let f = overload([pattern, callback]);
+        Object.defineProperty(f, 'rule', {
+            get() {
+                return f.rules[0];
+            }
+        });
+        f;
+    };
+
+    ({check, switch: switch_, overload, function: function_});
 };
