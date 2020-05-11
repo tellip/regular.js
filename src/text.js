@@ -1,16 +1,19 @@
 const type = require('./type');
 
 module.exports = do {
-    // let temp;
-    // let Record = type.function(
-    //     {0: 'boolean', 1: 'number', 2: 'number', 3: [temp = {0: 'string'}]},
-    //     (success, begin, end, children = []) => do {
-    //         let record = {success, begin, end, children};
-    //         record.__proto__ = Record.prototype;
-    //         record;
-    //     }
-    // );
-    // temp[1] = Record;
+    let Record = do {
+        let child_pattern;
+        let Record = type.function(
+            {0: 'boolean', 1: 'number', 2: 'number', 3: [child_pattern = {0: 'string'}]},
+            (success, begin, end, children) => do {
+                let record = {success, begin, end, children: children.map(([key, value]) => ({key, value}))};
+                record.__proto__ = Record.prototype;
+                record;
+            }
+        );
+        child_pattern[1] = Record;
+        Record;
+    };
     // let Pattern = match => do {
     //     let Pattern1 = data => do {
     //         let pattern = {match: (...args) => match(data, ...args)};

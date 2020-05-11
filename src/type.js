@@ -17,29 +17,13 @@ module.exports = do {
         rtn;
     };
 
-    let overload = (...rules) => do {
-        let f = function (...args) {
-            return switch_(args, ...f.rules.map(
-                ([pattern, callback]) => [pattern, () => callback(...args)]
-            ));
-        };
-        Object.defineProperty(f, 'rules', {
-            get() {
-                return rules;
-            }
-        });
-        f;
+    let overload = (...rules) => function (...args) {
+        return switch_(args, ...rules.map(
+            ([pattern, callback]) => [pattern, () => callback(...args)]
+        ));
     };
 
-    let function_ = (pattern, callback) => do {
-        let f = overload([pattern, callback]);
-        Object.defineProperty(f, 'rule', {
-            get() {
-                return f.rules[0];
-            }
-        });
-        f;
-    };
+    let function_ = (pattern, callback) => overload([pattern, callback]);
 
     ({check, switch: switch_, overload, function: function_});
 };
