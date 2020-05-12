@@ -7,6 +7,7 @@ exports.clean = () => gulp.src('dist', {read: false, allowEmpty: true})
 
 exports.js = () => gulp.src('src/**/*.js')
     .pipe(babel({
+        presets: ['@babel/preset-env'],
         plugins: ['@babel/plugin-proposal-do-expressions']
     }))
     .pipe(gulp.dest('dist'));

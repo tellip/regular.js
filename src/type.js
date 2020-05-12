@@ -10,17 +10,20 @@ module.exports = do {
 
     let switch_ = (value, ...branches) => do {
         let rtn;
+        let defaultCallback = branches.pop();
         branches.some(([pattern, callback]) => check(pattern, value) && do {
             rtn = callback();
             true;
-        });
+        }) || defaultCallback();
         rtn;
     };
 
     let overload = (...rules) => function (...args) {
         return switch_(args, ...rules.map(
             ([pattern, callback]) => [pattern, () => callback(...args)]
-        ));
+        ), () => {
+            throw new Error('invalid arguments: ' + args)
+        });
     };
 
     let function_ = (pattern, callback) => overload([pattern, callback]);

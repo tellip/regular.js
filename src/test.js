@@ -1,6 +1,5 @@
-const text = require('./text');
+const text_regexp = require('./text_regexp');
 
-let r = text.Record(false, 0, 1, [
-    ['asdf', text.Record(true, 0, 1, [])]
-]);
-console.log(r);
+let ra = text_regexp.aliases;
+
+console.log(ra.pc_ascii.match("我asdf1234", 0, 8));
