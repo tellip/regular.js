@@ -86,7 +86,7 @@ module.exports = do {
                     Pattern
                 );
                 let Mark = type.inherit(
-                    type.function({0: 'string', 1: Pattern}, (key, value) => type.implement(
+                    type.function({1: Pattern}, (key, value) => type.implement(
                         Pattern((...args) => do {
                             let r = value.match(...args);
                             let {success, begin, end} = r;
@@ -130,7 +130,7 @@ module.exports = do {
                 plc: type.function([Pattern], (...splice) => new Pattern.deriveds.Concatenation(...splice)),
                 pk: type.function({0: Pattern}, value => new Pattern.deriveds.KleeneStar(value)),
                 pm: type.overload(
-                    [{0: 'string', 1: Pattern}, (key, value) => new Pattern.deriveds.Mark(key, value)],
+                    [{1: Pattern}, (key, value) => new Pattern.deriveds.Mark(key, value)],
                     [{0: Pattern}, value => new Pattern.deriveds.Mark('', value)]
                 ),
                 pp: () => new Pattern.deriveds.Placeholder()

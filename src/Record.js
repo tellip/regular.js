@@ -8,9 +8,15 @@ module.exports = do {
             Record
         )
     );
-    Record.Child = type.function({0: 'string', 1: Record}, (key, value) => type.implement(
-        {key, value}, Record.Child
-    ));
+    Record.Child = do {
+        let callback = (key, value) => type.implement(
+            {key, value}, Record.Child
+        );
+        type.overload(
+            [{0: 'string', 1: Record}, callback],
+            [{0: 'symbol', 1: Record}, callback]
+        );
+    };
     temp.push(Record.Child);
     Record;
 };
