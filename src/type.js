@@ -1,4 +1,14 @@
 module.exports = do {
+    let implement = (data, Constructor) => do {
+        data.__proto__ = Constructor.prototype;
+        data;
+    };
+
+    let inherit = (Derived, Base) => do {
+        Derived.prototype.__proto__ = Base.prototype;
+        Derived;
+    };
+
     let check = (pattern, data) => pattern === null ? data === null : ({
         string: () => typeof data === pattern,
         function: () => data instanceof pattern || data.constructor === pattern,
@@ -28,5 +38,5 @@ module.exports = do {
 
     let function_ = (pattern, callback) => overload([pattern, callback]);
 
-    ({check, switch: switch_, overload, function: function_});
+    ({implement, inherit, check, switch: switch_, overload, function: function_});
 };
