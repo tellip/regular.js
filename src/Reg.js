@@ -90,7 +90,7 @@ module.exports = do {
                         Pattern((...args) => do {
                             let r = value.match(...args);
                             let {success, begin, end} = r;
-                            new Record(success, begin, end, [[key, r]]);
+                            new Record(success, begin, end, [new Record.Child(key, r)]);
                         }),
                         Mark
                     )),
