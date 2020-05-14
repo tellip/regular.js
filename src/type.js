@@ -1,4 +1,4 @@
-module.exports = do {
+export default do {
     let implement = (data, Constructor) => do {
         data.__proto__ = Constructor.prototype;
         data;

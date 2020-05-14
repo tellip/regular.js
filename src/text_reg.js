@@ -1,7 +1,7 @@
-const type = require('./type');
-const Reg = require('./Reg');
+import type from './type.js';
+import Reg from './Reg.js';
 
-module.exports = do {
+export default do {
     let text_reg = new Reg('number');
     let {Pattern, aliases} = text_reg;
 

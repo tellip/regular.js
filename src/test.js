@@ -1,4 +1,4 @@
-const text_reg = require('./text_reg');
+import text_reg from './text_reg.js';
 
 let {aliases: ra} = text_reg;
 

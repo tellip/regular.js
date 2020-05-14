@@ -1,7 +1,7 @@
-const type = require('./type');
-const Record = require('./Record');
+import type from './type.js';
+import Record from './Record.js';
 
-module.exports = do {
+export default do {
     let LOCK = Symbol();
     let callback = Character => type.implement(
         do {

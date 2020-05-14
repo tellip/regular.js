@@ -1,6 +1,6 @@
-const type = require('./type');
+import type from './type.js';
 
-module.exports = do {
+export default do {
     let temp, Record = type.function(
         {0: 'boolean', 1: 'number', 2: 'number', 3: temp = []},
         (success, begin, end, children) => type.implement(
