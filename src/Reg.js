@@ -136,8 +136,8 @@ module.exports = do {
                 pp: () => new Pattern.deriveds.Placeholder()
             };
             aliases.pc_any = aliases.pc(() => true);
-            aliases.pla_zo = type.function({0: Pattern}, one => aliases.pla(one, aliases.po));
-            aliases.plc_om = type.function({0: Pattern}, one => aliases.plc(one, aliases.pk(one)));
+            aliases.px_zo = type.function({0: Pattern}, one => aliases.pla(one, aliases.po));
+            aliases.px_om = type.function({0: Pattern}, one => aliases.plc(one, aliases.pk(one)));
 
             ({String: String_, Pattern, aliases});
         },
